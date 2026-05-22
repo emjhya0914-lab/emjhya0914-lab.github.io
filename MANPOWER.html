@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BreakNest</title>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <!-- Linked CSS Style Sheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <h2 class="brand-color">BreakNest</h2>
+      <span class="close-btn" onclick="closeMenu()">&times;</span>
+    </div>
+    <ul>
+      <li><a href="#" onclick="handleHome()">Home</a></li>
+      <li><a href="#" onclick="handleTimeTracking()">Time</a></li>
+      <li><a href="#" onclick="handleBreakTracking()">Breaks</a></li>
+      <li><a href="#" onclick="handleProfileEdit()">Profile</a></li>
+      <li><a href="#" onclick="openRecords()">Records</a></li>
+    </ul>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <i class="fa-solid fa-bars menu-btn" onclick="openMenu()"></i>
+    <div class="logo">
+      <i class="fa-regular fa-clock"></i>
+    </div>
+  </div>
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <div class="hero-logo">
+        <i class="fa-regular fa-clock"></i>
+      </div>
+      <h1>BreakNest</h1>
+    </div>
+  </div>
+
+  <!-- MAIN APP CONTENT -->
+  <div class="content">
+    <p class="welcome">
+      This is the Manpower Attendance Record.
+    </p>
+
+    <!-- CARD 1: TIME IN & OUT -->
+    <div class="card clickable-card" onclick="handleTimeTracking()">
+      <div class="card-left">
+        <div class="icon-box">
+          <i class="fa-regular fa-clock"></i>
+        </div>
+        <div>
+          <h3>Time In & Out</h3>
+          <p>Time on Work</p>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-right arrow"></i>
+    </div>
+
+    <!-- CARD 2: TRACK BREAKS -->
+    <div class="card">
+      <div class="card-left">
+        <div class="icon-box">
+          <i class="fa-solid fa-stopwatch"></i>
+        </div>
+        <div>
+          <h3>Track Breaks</h3>
+          <p>Clock break in and break out</p>
+        </div>
+      </div>
+      <button class="blue-btn" onclick="handleBreakTracking()">Start Break</button>
+    </div>
+
+    <!-- CARD 3: EDIT PROFILE -->
+    <div class="card clickable-card" onclick="handleProfileEdit()">
+      <div class="card-left">
+        <div class="icon-box">
+          <i class="fa-regular fa-user"></i>
+        </div>
+        <div>
+          <h3>Edit Profile</h3>
+          <p>Update your personal information</p>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-right arrow"></i>
+    </div>
+
+    <!-- NEW CARD 4: VIEW RECORDS -->
+    <div class="card clickable-card" onclick="openRecords()">
+      <div class="card-left">
+        <div class="icon-box">
+          <i class="fa-solid fa-folder-open"></i>
+        </div>
+        <div>
+          <h3>View Records</h3>
+          <p>Check your historical data logs</p>
+        </div>
+      </div>
+      <i class="fa-solid fa-chevron-right arrow"></i>
+    </div>
+  </div>
+
+  <!-- POPUP RECORDS MODAL CONTAINER -->
+  <div class="modal-overlay" id="recordsModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>📋 Activity History Logs</h3>
+        <span class="modal-close" onclick="closeRecords()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom: 15px; color: #666; font-size: 14px;">Here are your most recent entries:</p>
+        <table class="records-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Action</th>
+              <th>Duration / Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>May 22, 2026</td>
+              <td><span class="badge badge-work">Shift Start</span></td>
+              <td>09:00 AM</td>
+            </tr>
+            <tr>
+              <td>May 22, 2026</td>
+              <td><span class="badge badge-break">Coffee Break</span></td>
+              <td>15 mins</td>
+            </tr>
+            <tr>
+              <td>May 21, 2026</td>
+              <td><span class="badge badge-work">Shift End</span></td>
+              <td>05:30 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // Sidebar Controls
+    function openMenu() {
+      document.getElementById("sidebar").classList.add("active");
+    }
+
+    function closeMenu() {
+      document.getElementById("sidebar").classList.remove("active");
+    }
+
+    // Navigation and Action handlers
+    function handleHome() {
+      closeMenu();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function handleTimeTracking() {
+      closeMenu();
+      alert("⏱️ Shift tracking activated! Logging your work hours.");
+    }
+
+    function handleBreakTracking() {
+      closeMenu();
+      alert("☕ Break started! Take a deep breath and relax.");
+    }
+
+    function handleProfileEdit() {
+      closeMenu();
+      alert("👤 Navigating to your Profile Settings page.");
+    }
+
+    // Modal Display Controls for Records
+    function openRecords() {
+      closeMenu();
+      document.getElementById("recordsModal").classList.add("show");
+    }
+
+    function closeRecords() {
+      document.getElementById("recordsModal").classList.remove("show");
+    }
+
+    // Close modal if user clicks anywhere outside the card box
+    window.onclick = function(event) {
+      let modal = document.getElementById("recordsModal");
+      if (event.target == modal) {
+        modal.classList.remove("show");
+      }
+    }
+  </script>
+</body>
+</html>
